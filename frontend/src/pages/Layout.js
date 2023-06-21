@@ -4,11 +4,11 @@ const Layout = () => {
     return (
         <>
             <nav >
-                <ul className="bg-[#ff961d] justify-between flex max-w-[100%] p-5">
+                <ul className="bg-[#ff961d] justify-between flex max-w-[100%] p-5 items-center">
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link className="font-bold text-[2rem]" to="/">TechWaffle</Link>
                     </li>
-                    <div className="justify-between flex gap-7">
+                    <div className="justify-between flex font-bold text-[1.2rem] gap-7">
                         <li>
                             <Link to="/blogs">Blogs</Link>
                         </li>
