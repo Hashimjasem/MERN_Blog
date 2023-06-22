@@ -3,13 +3,11 @@ import { useState } from "react";
 function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    
-    
     async function register(ev) {
         ev.preventDefault();
         const response = await fetch('http://localhost:4000/register', {
             method: 'POST',
-            body: JSON.stringify({username,password}),
+            body: JSON.stringify({ username, password }),
             headers: { 'Content-Type': 'application/json' },
         });
         if (response.status === 200) {
@@ -18,7 +16,6 @@ function Register() {
             alert('registration failed');
         }
     }
-
     return (
         <div className="bg-grey-lighter min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
