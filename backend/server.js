@@ -7,9 +7,11 @@ const salt = bcrypt.genSaltSync(10)
 const User = require('./models/User.js')
 const jwt = require('jsonwebtoken')
 const secret = '932hdj8347d9002mshdh93'
+const cookieParser = require('cookie-parser')
 
 app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 app.use(express.json())
+app.use(cookieParser())
 
 mongoose.connect('mongodb+srv://jhashim1305:JASEM.h02@blogcluster.rqxxm5q.mongodb.net/?retryWrites=true&w=majority')
 
@@ -35,10 +37,27 @@ app.post('/login', async (req, res) => {
             //login
             jwt.sign({username, id:userDoc._id}, secret, {}, (err, token) => {
                 if (err) throw err;
-                res.cookie('token', token).json('ok')
+                res.cookie('token', token).json({
+                    id:userDoc._id,
+                    username
+                })
             });
         } else {
             res.status(400).json('wrong credentials');
         }
 });
+
+app.get('/profile', (req,res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, (err, info) => {
+        if (err) throw err;
+        res.json(info);
+    });
+});
+
+app.post('/logout', (req,res) => {
+    res.cookie('token', '').json('ok')
+})
+
+
 app.listen(4000)
