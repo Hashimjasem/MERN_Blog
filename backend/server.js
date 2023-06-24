@@ -39,7 +39,7 @@ app.post('/login', async (req, res) => {
                 if (err) throw err;
                 res.cookie('token', token).json({
                     id:userDoc._id,
-                    username
+                    username,
                 })
             });
         } else {
