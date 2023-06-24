@@ -18,7 +18,6 @@ function Login() {
         credentials: 'include',
       });
       if (response.ok) {
-        alert('correct credentials');
         response.json().then(userInfo => {
           setUserInfo(userInfo);
           setRedirect(true);
