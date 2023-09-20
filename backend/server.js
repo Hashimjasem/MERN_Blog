@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect('mongodb+srv://jhashim1305:JASEM.h02@blogcluster.rqxxm5q.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb://localhost:27017/');
 
 app.post('/register', async (req,res) => {
   const {username,password} = req.body;
@@ -54,11 +54,11 @@ app.post('/login', async (req,res) => {
 });
 
 app.get('/profile', (req,res) => {
-  const {token} = req.cookies;
-  jwt.verify(token, secret, {}, (err,info) => {
-    if (err) throw err;
-    res.json(info);
-  });
+  // const {token} = req.cookies;
+  // jwt.verify(token, secret, {}, (err,info) => {
+  //   if (err) throw err;
+  //   res.json(info);
+  // });
 });
 
 app.post('/logout', (req,res) => {
